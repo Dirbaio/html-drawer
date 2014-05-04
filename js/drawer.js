@@ -1,8 +1,7 @@
 "use strict";
 
-var isSafari = false;
-if(navigator.userAgent.indexOf("Safari") !== -1)
-	isSafari = true;
+var userAgent = window.navigator.userAgent;
+var isSafari = userAgent.match(/iPad/i) || userAgent.match(/iPhone/i);
 
 var hideTimeout = false;
 function showDrawer(percent)
@@ -91,9 +90,11 @@ $(document).ready(function() {
 
 	document.addEventListener('touchstart', function(event) {
 		if(drawerAlwaysVisible()) return;
-		if(event.touches[0].pageX < (isSafari?150:30) || drawerShown)
+		// On Safari edge-swipe is used for back navigation. 
+		// So, in case of Safari I don't require edge-swiping, any swiping will do. 
+		// If you have a better alternative, please let me know!
+		if(event.touches[0].pageX < 30 || isSafari || drawerShown)
 		{
-
 			touchDown = true;
 			touchDownX = event.touches[0].pageX;
 			touchDownY = event.touches[0].pageY;
