@@ -38,6 +38,7 @@ function resetDrawer()
 	$('#drawer-overlay').css('visibility', "");
 	$("#drawer").css("-webkit-transform", "");
 	$("#drawer").css("transform", "");
+	$("#drawer").css("visibility", "");
 	
 	drawerShown = false;
 }
